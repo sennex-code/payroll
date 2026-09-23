@@ -1,5 +1,5 @@
 import React from "react";
-import { badgeClass } from "../leaveConstants";
+import { attendanceColors, badgeClass } from "../leaveConstants";
 
 const LeaveCalendarModal = ({
   setSelectedDate,
