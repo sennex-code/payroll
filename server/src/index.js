@@ -14,10 +14,15 @@ const app = express();
 const PORT = process.env.BACKEND_PORT || 8000;
 
 // Updated CORS configuration to allow React and your custom headers
+const allowedOrigins = [
+  "https://payroll-git-main-suneex.vercel.app",
+  "https://payroll-suneex.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true,
     allowedHeaders: [
       "Content-Type",
