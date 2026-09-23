@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS attendance (
   id INT AUTO_INCREMENT PRIMARY KEY,
   emp_id VARCHAR(50) NOT NULL,
   date DATE NOT NULL,
-  status ENUM('Present', 'Absent', 'Late', 'Undertime', 'Half-Day', 'On Leave', 'Field') DEFAULT 'Pending',
+  status ENUM('Pending', 'Present', 'Absent', 'Late', 'Undertime', 'Half-Day', 'On Leave', 'Field') DEFAULT 'Pending',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY uniq_emp_date (emp_id, date),
