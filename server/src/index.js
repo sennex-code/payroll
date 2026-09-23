@@ -16,7 +16,7 @@ const PORT = process.env.BACKEND_PORT || 8000;
 // Updated CORS configuration to allow React and your custom headers
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow your React frontend
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     allowedHeaders: [
