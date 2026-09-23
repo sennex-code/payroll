@@ -17,6 +17,7 @@ const PORT = process.env.BACKEND_PORT || 8000;
 const allowedOrigins = [
   "https://payroll-git-main-suneex.vercel.app",
   "https://payroll-suneex.vercel.app",
+  "https://payroll-silk-nu.vercel.app",
 ];
 
 app.use(
