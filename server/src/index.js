@@ -11,7 +11,7 @@ import hrReportsRoutes from "./routes/hrReportRoutes.js";
 import leaveRoutes from "./routes/leaveRoutes.ts";
 
 const app = express();
-const PORT = process.env.BACKEND_PORT || 8000;
+const PORT = process.env.PORT || 8000;
 
 // Updated CORS configuration to allow React and your custom headers
 
