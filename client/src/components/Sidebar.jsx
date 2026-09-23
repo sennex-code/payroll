@@ -11,6 +11,7 @@ import {
   Settings,
   User, // <-- ADDED THIS IMPORT
 } from "lucide-react";
+import { API_BASE_URL } from "../hooks/interceptor";
 
 const navItems = {
   Admin: [
@@ -58,7 +59,6 @@ export default function Sidebar({ role, onLogout, isCollapsed = false }) {
 
   // --- ADDED THESE THREE VARIABLES ---
   const currentUser = JSON.parse(localStorage.getItem("wah_user") || "{}");
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
   const displayName =
     currentUser.name ||
     `${currentUser.first_name || ""} ${currentUser.last_name || ""}`.trim() ||

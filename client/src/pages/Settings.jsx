@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiFetch } from "../lib/api";
+import axiosInterceptor, { API_BASE_URL } from "../hooks/interceptor";
 import Toast from "../components/Toast";
 import { useToast } from "../hooks/useToast";
 import { Camera, Lock, User, Eye, EyeOff } from "lucide-react"; // <-- Added Eye and EyeOff
@@ -11,7 +12,6 @@ export default function Settings() {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("wah_user") || "{}"),
   );
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
   const displayFirstName =
     currentUser?.first_name ||
@@ -50,15 +50,10 @@ export default function Settings() {
     mutationFn: async (file) => {
       const formData = new FormData();
       formData.append("profile_photo", file);
-      const token = localStorage.getItem("wah_token");
 
-      const res = await fetch(`${API_BASE_URL}/api/employees/me/photo`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      });
-      if (!res.ok) throw new Error("Failed to upload photo");
-      return res.json();
+      const res = await axiosInterceptor.post("/api/employees/me/photo", formData);
+      if (!res.data) throw new Error("Failed to upload photo");
+      return res.data;
     },
     onSuccess: (data) => {
       const updatedUser = { ...currentUser, profile_photo: data.filePath };

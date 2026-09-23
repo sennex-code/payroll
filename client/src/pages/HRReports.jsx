@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { apiFetch } from "../lib/api";
+import { API_BASE_URL } from "../hooks/interceptor";
 import { User } from "lucide-react";
 import {
   BarChart,
@@ -18,8 +19,6 @@ import {
 export default function HRReports() {
   const [reportType, setReportType] = useState("leave");
   const [dateRange, setDateRange] = useState("month");
-
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
   const {
     data: dynamicData = [],

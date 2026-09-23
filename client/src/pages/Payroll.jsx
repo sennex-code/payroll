@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { apiFetch } from "../lib/api";
+import { API_BASE_URL } from "../hooks/interceptor";
 import Toast from "../components/Toast";
 import { useToast } from "../hooks/useToast";
 import { User, Mail } from "lucide-react"; // <-- ADDED Mail Icon
@@ -126,8 +127,6 @@ export default function Payroll({ shortcutMode = false }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { toast, showToast, clearToast } = useToast();
   const [period, setPeriod] = useState(getCurrentPeriod);
-
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
   const currentUser = useMemo(() => {
     try {

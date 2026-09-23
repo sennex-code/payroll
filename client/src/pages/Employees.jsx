@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { apiFetch } from "../lib/api";
 import Toast from "../components/Toast";
 import { useToast } from "../hooks/useToast";
-import axiosInterceptor from "@/hooks/interceptor";
+import axiosInterceptor, { API_BASE_URL } from "@/hooks/interceptor";
 import { User } from "lucide-react";
 
 const designationMap = {
@@ -89,8 +89,6 @@ export default function Employees({ shortcutMode = false }) {
       return res.json();
     },
   });
-
-  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
   // --- MUTATIONS ---
   const addMutation = useMutation({

@@ -1,1 +1,1 @@
-export const URL = "http://localhost:8000";
+export { API_BASE_URL as URL } from "../hooks/interceptor";

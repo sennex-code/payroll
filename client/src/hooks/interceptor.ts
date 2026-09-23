@@ -3,8 +3,10 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 const getAccessToken = () => localStorage.getItem("wah_token") || "";
 const setAccessToken = (token: string) =>
   localStorage.setItem("wah_token", token);
+export const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:8000";
 const axiosInterceptor = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: API_BASE_URL,
   withCredentials: true,
 
   headers: {

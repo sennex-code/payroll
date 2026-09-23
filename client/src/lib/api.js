@@ -1,21 +1,38 @@
-import { URL } from "../assets/constant";
+import axiosInterceptor from "../hooks/interceptor";
 
 export const getStoredToken = () => localStorage.getItem("wah_token") || "";
 
+const toResponse = (status, statusText, payload) => ({
+  ok: status >= 200 && status < 300,
+  status,
+  statusText,
+  json: async () => {
+    const text = await payload.text();
+    return text ? JSON.parse(text) : {};
+  },
+  blob: async () => payload,
+});
+
 export const apiFetch = async (path, options = {}) => {
-  const token = getStoredToken();
+  const { method = "GET", headers = {}, body } = options;
 
-  const headers = {
-    "ngrok-skip-browser-warning": "69420",
-    ...(options.headers || {}),
-  };
+  try {
+    const response = await axiosInterceptor.request({
+      url: path,
+      method,
+      headers,
+      data: body,
+      responseType: "blob",
+    });
 
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
+    return toResponse(response.status, response.statusText, response.data);
+  } catch (error) {
+    if (error?.response) {
+      const { data, status, statusText } = error.response;
+      const payload = data instanceof Blob ? data : new Blob([data]);
+      return toResponse(status, statusText, payload);
+    }
+
+    throw error;
   }
-
-  return fetch(`${URL}${path}`, {
-    ...options,
-    headers,
-  });
 };
